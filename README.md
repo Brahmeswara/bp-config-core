@@ -26,6 +26,11 @@ npm run cleanup:db
 
 npm run integration-test
 
+## Publishing the package
+npm publish 
+
+`NOTE`: by default, my npm repo is set to AWS Codeartifact. new packages would be published to AWS Codeartifact.
+
 
 
 
