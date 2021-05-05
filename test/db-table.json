@@ -1,0 +1,53 @@
+{
+    "AttributeDefinitions": [
+    {
+        "AttributeName": "base-pk", 
+        "AttributeType": "S"
+    }, 
+    {
+        "AttributeName": "base-sk", 
+        "AttributeType": "S"
+    },
+    {
+        "AttributeName": "bp-gs1-sk", 
+        "AttributeType": "S"
+    }
+    ], 
+    "ProvisionedThroughput": {
+        "WriteCapacityUnits": 5, 
+        "ReadCapacityUnits": 5
+    }, 
+    "TableName": "testtable", 
+    "KeySchema": [
+        {
+            "KeyType": "HASH", 
+            "AttributeName": "base-pk"
+        },
+        {
+            "KeyType": "RANGE", 
+            "AttributeName": "base-sk"
+        }
+    ],
+    "GlobalSecondaryIndexes": [
+        {
+            "IndexName": "bp-gs1", 
+            "Projection": {
+                "ProjectionType": "ALL"
+            }, 
+            "ProvisionedThroughput": {
+                "WriteCapacityUnits": 5, 
+                "ReadCapacityUnits": 5
+            }, 
+            "KeySchema": [
+            {
+                "KeyType": "HASH", 
+                "AttributeName": "base-sk"
+            },
+            {
+                "KeyType": "RANGE", 
+                "AttributeName": "bp-gs1-sk"
+            }
+            ]
+        }
+    ]
+}
