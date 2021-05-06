@@ -30,7 +30,7 @@
             }
         ],
         "TableStatus": "CREATING",
-        "CreationDateTime": "2021-05-05T05:25:34.580000-07:00",
+        "CreationDateTime": "2021-05-06T00:23:38.531000-07:00",
         "ProvisionedThroughput": {
             "NumberOfDecreasesToday": 0,
             "ReadCapacityUnits": 5,
@@ -39,7 +39,7 @@
         "TableSizeBytes": 0,
         "ItemCount": 0,
         "TableArn": "arn:aws:dynamodb:us-east-1:356531459747:table/testtable",
-        "TableId": "c35fb986-1594-4394-9f60-827cf4a8c75f",
+        "TableId": "ccd62583-0501-454a-8be5-0d5f67bdc17b",
         "GlobalSecondaryIndexes": [
             {
                 "IndexName": "bp-gs1",

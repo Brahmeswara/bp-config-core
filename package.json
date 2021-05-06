@@ -16,9 +16,11 @@
         "unit-test": "mocha -r ts-node/register -r source-map-support/register src-ts/**/*-spec.ts -timeout 5000",
         "lint": "eslint  --config tslint.json 'src-ts/**/*.ts'",
         "unit-te": "mocha -r ts-node/register -r source-map-support/register src-ts/core/services/*spec.ts -timeout 5000",
-        "deleteTable" : "aws dynamodb delete-table --table-name testtable",
-        "createTable" : "aws dynamodb create-table --cli-input-json file://test/db-table.json --no-paginate",
-        "cleanup:db" : "npm run deleteTable && npm run createTable > test/db.out",
+        "deleteTable": "aws dynamodb delete-table --table-name testtable",
+        "createTable": "aws dynamodb create-table --cli-input-json file://test/db-table.json --no-paginate",
+        "create-wait": "aws dynamodb wait table-exists --table-name testtable",
+        "delete-wait": "aws dynamodb wait table-not-exists --table-name testtable",
+        "cleanup-db": "npm run deleteTable && npm run delete-wait && npm run createTable > test/db.out && npm run create-wait",
         "integration-test": "mocha -r ts-node/register -r source-map-support/register test/*integration*.ts -timeout 10000"
     },
     "devDependencies": {
@@ -39,6 +41,6 @@
     },
     "homepage": "https://github.com/Brahmeswara/bp-config-core#readme",
     "dependencies": {
-        "@docudata/common-utils": "^1.2.4"
+        "@docudata/common-utils": "^1.2.5"
     }
 }

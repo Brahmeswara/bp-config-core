@@ -128,5 +128,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# test temp data
+test/db.out
 
 # End of https://www.gitignore.io/api/osx,node,linux,windows

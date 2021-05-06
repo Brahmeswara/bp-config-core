@@ -22,7 +22,7 @@ npm run unit-test
 
 This is mainly to test datasource implemenation with database.
 
-npm run cleanup:db
+npm run cleanup-db
 
 npm run integration-test
 
