@@ -6,31 +6,31 @@
     "TableDescription": {
         "AttributeDefinitions": [
             {
-                "AttributeName": "base-pk",
+                "AttributeName": "bpPK",
                 "AttributeType": "S"
             },
             {
-                "AttributeName": "base-sk",
+                "AttributeName": "bpSK",
                 "AttributeType": "S"
             },
             {
-                "AttributeName": "bp-gs1-sk",
+                "AttributeName": "gs1SK",
                 "AttributeType": "S"
             }
         ],
         "TableName": "testtable",
         "KeySchema": [
             {
-                "AttributeName": "base-pk",
+                "AttributeName": "bpPK",
                 "KeyType": "HASH"
             },
             {
-                "AttributeName": "base-sk",
+                "AttributeName": "bpSK",
                 "KeyType": "RANGE"
             }
         ],
         "TableStatus": "CREATING",
-        "CreationDateTime": "2021-05-06T00:23:38.531000-07:00",
+        "CreationDateTime": "2021-05-07T03:50:47.953000-07:00",
         "ProvisionedThroughput": {
             "NumberOfDecreasesToday": 0,
             "ReadCapacityUnits": 5,
@@ -39,17 +39,17 @@
         "TableSizeBytes": 0,
         "ItemCount": 0,
         "TableArn": "arn:aws:dynamodb:us-east-1:356531459747:table/testtable",
-        "TableId": "ccd62583-0501-454a-8be5-0d5f67bdc17b",
+        "TableId": "199bae5a-2f50-4056-bc7f-741ec6ea0687",
         "GlobalSecondaryIndexes": [
             {
-                "IndexName": "bp-gs1",
+                "IndexName": "bpGS1",
                 "KeySchema": [
                     {
-                        "AttributeName": "base-sk",
+                        "AttributeName": "bpSK",
                         "KeyType": "HASH"
                     },
                     {
-                        "AttributeName": "bp-gs1-sk",
+                        "AttributeName": "gs1SK",
                         "KeyType": "RANGE"
                     }
                 ],
@@ -64,7 +64,7 @@
                 },
                 "IndexSizeBytes": 0,
                 "ItemCount": 0,
-                "IndexArn": "arn:aws:dynamodb:us-east-1:356531459747:table/testtable/index/bp-gs1"
+                "IndexArn": "arn:aws:dynamodb:us-east-1:356531459747:table/testtable/index/bpGS1"
             }
         ]
     }

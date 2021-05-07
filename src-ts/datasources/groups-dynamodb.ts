@@ -1,5 +1,3 @@
-
-
 import {GroupItemKey, GroupItem} from "../core/models/groups";
 import {DynamoDB} from 'aws-sdk';
 import {DocumentClient} from 'aws-sdk/clients/dynamodb';
@@ -47,7 +45,7 @@ export class GroupsDynamodbRepo implements GroupsRepositoryInterface {
           Key: grpKey
       };
 
-    var grpItem: GroupItem = {'base-pk': '', 'base-sk':'', 'description' : ''};
+    var grpItem: GroupItem = {'bpPK': '', 'bpSK':'', 'description' : ''};
 
      logger.debug('repo get params; ' + JSON.stringify(params));
      var item  = await this.dbClient.get(params).promise() ;
@@ -55,16 +53,16 @@ export class GroupsDynamodbRepo implements GroupsRepositoryInterface {
 
      if ( ! item.Item ) 
      {
-       throw Error('Results not found for group name ' + grpKey['base-sk']);
+       throw Error('Results not found for group name ' + grpKey['bpSK']);
      }
 
-     grpItem["base-pk"] = item.Item['base-pk'];
-     grpItem["base-sk"] = item.Item['base-sk'];
+     grpItem["bpPK"] = item.Item.bpPK;
+     grpItem["bpSK"] = item.Item.bpSK;
      grpItem.description = item.Item.description;
-     grpItem.createdAt  = item.Item.createdAt;
-     grpItem.createdBy = item.Item.createdBy;
-     grpItem.updatedAt = item.Item.updatedAt;
-     grpItem.updatedBy = item.Item.updatedBy;
+     grpItem.cAt  = item.Item.cAt;
+     grpItem.cBy = item.Item.cBy;
+     grpItem.uAt = item.Item.uAt;
+     grpItem.uBy = item.Item.uBy;
 
      return grpItem;
   }
@@ -74,25 +72,28 @@ export class GroupsDynamodbRepo implements GroupsRepositoryInterface {
   {
       var params = {
           TableName : tableName,
-          KeyConditionExpression : "#baseKey = :basePk" ,
-          ExpressionAttributeNames: { "#baseKey" : "base-pk"},
-          ExpressionAttributeValues: { ":basePk" : 'groups'}
+          KeyConditionExpression : "#baseKey = :bpPK" ,
+          ExpressionAttributeNames: { "#baseKey" : "bpPK"},
+          ExpressionAttributeValues: { ":bpPK" : 'groups'}
       };
      var res = await this.dbClient.query(params).promise() ;
      return res.Items as any[];
   }
 
-  async update (grpKey: GroupItemKey, payload: any) 
+  async update (grpItem: GroupItem) 
   {
 
       var params = {
           TableName : tableName,
-          Key: grpKey,
-          UpdateExpression: "set  description = :description, updatedBy = :updatedBy , updatedAt = :updatedAt ",
+          Key: {
+            'bpPK' : grpItem.bpPK,
+            'bpSK' : grpItem.bpSK
+          },
+          UpdateExpression: "set  description = :description, uBy = :updatedBy , uAt = :updatedAt ",
           ExpressionAttributeValues: {
-              ":description": payload.description,
-              ":updatedBy": payload.updatedBy,
-              ":updatedAt": payload.updatedAt
+              ":description": grpItem.description,
+              ":updatedBy": grpItem.uBy,
+              ":updatedAt": grpItem.uAt
           },
           ReturnValues: "UPDATED_NEW"
       };

@@ -1,15 +1,15 @@
 {
     "AttributeDefinitions": [
     {
-        "AttributeName": "base-pk", 
+        "AttributeName": "bpPK", 
         "AttributeType": "S"
     }, 
     {
-        "AttributeName": "base-sk", 
+        "AttributeName": "bpSK", 
         "AttributeType": "S"
     },
     {
-        "AttributeName": "bp-gs1-sk", 
+        "AttributeName": "gs1SK", 
         "AttributeType": "S"
     }
     ], 
@@ -21,16 +21,16 @@
     "KeySchema": [
         {
             "KeyType": "HASH", 
-            "AttributeName": "base-pk"
+            "AttributeName": "bpPK"
         },
         {
             "KeyType": "RANGE", 
-            "AttributeName": "base-sk"
+            "AttributeName": "bpSK"
         }
     ],
     "GlobalSecondaryIndexes": [
         {
-            "IndexName": "bp-gs1", 
+            "IndexName": "bpGS1", 
             "Projection": {
                 "ProjectionType": "ALL"
             }, 
@@ -41,11 +41,11 @@
             "KeySchema": [
             {
                 "KeyType": "HASH", 
-                "AttributeName": "base-sk"
+                "AttributeName": "bpSK"
             },
             {
                 "KeyType": "RANGE", 
-                "AttributeName": "bp-gs1-sk"
+                "AttributeName": "gs1SK"
             }
             ]
         }

@@ -27,8 +27,8 @@ export class GroupsService {
             throw new Error('GroupServices: get: provide groupname to get details.')
 
         var itemKey: GroupItemKey = {
-            'base-pk' : 'groups',
-            'base-sk' : request.id,
+            'bpPK' : 'groups',
+            'bpSK' : request.id,
         };
 
         return await this.repository.get(itemKey);
@@ -41,13 +41,13 @@ export class GroupsService {
         //logger.debug('groupsService: typeof incoming request: '+ typeof request);
         var grpItem: GroupItem = {
           
-            'base-pk' : "groups",
-            'base-sk' : request.groupName,
-            'description' : request.desc,
-            'createdBy' : request.userName,
-            'createdAt' : new Date().toDateString(),
-            'updatedBy' : request.userName,
-            'updatedAt' : new Date().toDateString()
+            'bpPK' : "groups",
+            'bpSK' : request.groupName,
+            'description' : request.description,
+            'cBy' : request.userName,
+            'cAt' : new Date().toDateString(),
+            'uBy' : request.userName,
+            'uAt' : new Date().toDateString()
 
         }
 
@@ -59,19 +59,15 @@ export class GroupsService {
         if ( ! groupName ) 
             throw Error('group name to update is empty and must be passed to update');
 
-        var itemKey: GroupItemKey = {
-            'base-pk' : 'groups',
-            'base-sk' : groupName
-        }
-
-        var payload: any = {
+        var item: GroupItem = {
+            'bpPK' : 'groups',
+            'bpSK' : groupName,
             'description' : request.description,
-            'updatedBy'   : request.userName,
-            'updatedAt'   : new Date().toDateString()
+            'uBy' : request.userName,
+            'uAt' : new Date().toDateString()
         }
 
-        return await this.repository.update(itemKey, payload);
-
+        return await this.repository.update(item);
     }
 
 }

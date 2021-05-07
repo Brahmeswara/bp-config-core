@@ -10,53 +10,53 @@ const {Logger} = require('@docudata/common-utils');
 const logger = new Logger('goups-dynamodb-integration-tests');
 
 const testGrp: GroupItem = {
-    'base-pk' : "groups",
-    'base-sk': 'Closing',
+    'bpPK' : "groups",
+    'bpSK': 'Closing',
     description: 'Closing process related documents',
-    createdBy: 'brahmeswara@yahoo.com',
-    updatedBy: 'brahmeswara@yahoo.com',
-    createdAt:  new Date().toDateString(),
-    updatedAt: new Date().toDateString()
+    cBy: 'brahmeswara@yahoo.com',
+    uBy: 'brahmeswara@yahoo.com',
+    cAt:  new Date().toDateString(),
+    uAt: new Date().toDateString()
 };
 
 const testGrpKey: GroupItemKey = {
-  'base-pk' : "groups",
-  'base-sk': 'Closing'
+  'bpPK' : "groups",
+  'bpSK': 'Closing'
 };
 
 
 const testGrp2: GroupItem = {
-  'base-pk' : "groups",
-  'base-sk': 'Mortgage',
+  'bpPK' : "groups",
+  'bpSK': 'Mortgage',
   description: 'Mortgage process related documents',
-  createdBy: 'brahmeswara@yahoo.com',
-  updatedBy: 'brahmeswara@yahoo.com',
-  createdAt:  new Date().toDateString(),
-  updatedAt: new Date().toDateString()
+  cBy: 'brahmeswara@yahoo.com',
+  uBy: 'brahmeswara@yahoo.com',
+  cAt:  new Date().toDateString(),
+  uAt: new Date().toDateString()
 };
 
 const testGrpKey2: GroupItemKey = {
-  'base-pk' : "groups",
-  'base-sk': 'Mortgage'
+  'bpPK' : "groups",
+  'bpSK': 'Mortgage'
 };
 
-const updatedPayload: any = {
+const testGrp2Updated: any = {
+  'bpPK' : "groups",
+  'bpSK': 'Mortgage',
   description: 'updated desc - Mortgage process related documents',
-  createdBy: 'brahmeswara@yahoo.com',
-  updatedBy: 'brahmeswara@yahoo.com',
-  createdAt:  new Date().toDateString(),
-  updatedAt: new Date().toDateString()
+  cBy: 'brahmeswara@yahoo.com',
+  uBy: 'brahmeswara@yahoo.com',
+  cAt:  new Date().toDateString(),
+  uAt: new Date().toDateString()
 };
 
 const doesNotExistsKey: GroupItemKey = {
-  'base-pk' : "groups",
-  'base-sk': 'should be be there'
+  'bpPK' : "groups",
+  'bpSK': 'should be be there'
 };
 
 
 describe('Groups-DynamoDB', () => {
-  
-  describe('Groups-DynamoDB', () => {
 
     const dynamoRepo = container.groupsRepository;
 
@@ -89,16 +89,16 @@ describe('Groups-DynamoDB', () => {
     });
 
     it('update: is successful', async () => {
-      const result = await dynamoRepo.update(testGrpKey2, updatedPayload);
+      const result = await dynamoRepo.update(testGrp2Updated);
       logger.debug('res: ', JSON.stringify(result));
       logger.debug('desc: ', result.Attributes.description)
-      expect(result.Attributes.description).to.deep.equal(updatedPayload['description']);
+      expect(result.Attributes.description).to.deep.equal(testGrp2Updated['description']);
     });
 
 
     it('get: updated record and check', async () => {
       const result = await dynamoRepo.get(testGrpKey2);
-      expect(result.description).to.deep.equal(updatedPayload['description']);
+      expect(result.description).to.deep.equal(testGrp2Updated['description']);
     });
     
     it('list: grt all groups', async () => {
@@ -108,5 +108,3 @@ describe('Groups-DynamoDB', () => {
     });
 
   });
-
-});

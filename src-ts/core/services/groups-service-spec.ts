@@ -7,50 +7,50 @@ import {GroupItemKey, GroupItem} from './../models/groups';
 import {GroupsRepositoryInterface } from '../respository/groups-repo'
 
 const testGrp: GroupItem = {
-    'base-pk' : "groups",
-    'base-sk': 'Closing',
+    'bpPK' : "groups",
+    'bpSK': 'Closing',
     description: 'Closing process related documents',
-    createdBy: 'brahmeswara@yahoo.com',
-    updatedBy: 'brahmeswara@yahoo.com',
-    createdAt:  new Date().toDateString(),
-    updatedAt: new Date().toDateString()
+    cBy: 'brahmeswara@yahoo.com',
+    uBy: 'brahmeswara@yahoo.com',
+    cAt:  new Date().toDateString(),
+    uAt: new Date().toDateString()
 };
 
 const testGrp2: GroupItem = {
-  'base-pk' : "groups",
-  'base-sk': 'Mortgage',
+  'bpPK' : "groups",
+  'bpSK': 'Mortgage',
   description: 'Mortgage process related documents',
-  createdBy: 'brahmeswara@yahoo.com',
-  updatedBy: 'brahmeswara@yahoo.com',
-  createdAt:  new Date().toDateString(),
-  updatedAt: new Date().toDateString()
+  cBy: 'brahmeswara@yahoo.com',
+  uBy: 'brahmeswara@yahoo.com',
+  cAt:  new Date().toDateString(),
+  uAt: new Date().toDateString()
 };
 
 const testGrpKey: GroupItemKey = {
-  'base-pk' : "groups",
-  'base-sk': 'Closing'
+  'bpPK' : "groups",
+  'bpSK': 'Closing'
 };
 
 const testGrpKey2: GroupItemKey = {
-  'base-pk' : "groups",
-  'base-sk': 'Mortgage'
+  'bpPK' : "groups",
+  'bpSK': 'Mortgage'
 };
 
 var updateTestPayload: any = {
   'description' : 'updated desc..',
-  'updatedBy'   : 'brahmeswara@yahoo.com',
-  'updatedAt'   : new Date().toDateString(),
+  'uBy'   : 'brahmeswara@yahoo.com',
+  'uAt'   : new Date().toDateString(),
   'userName'    : 'brahmeswara@yahoo.com'
 };
 
 const testGrp2Updated: GroupItem = {
-  'base-pk' : testGrp2['base-pk'],
-  'base-sk': testGrp2['base-sk'],
+  'bpPK' : testGrp2.bpPK,
+  'bpSK': testGrp2.bpSK,
   'description' : updateTestPayload.description,
-  'updatedBy'   : updateTestPayload.userName,
-  'updatedAt'   : updateTestPayload.updatedAt,
-  'createdAt'   : testGrp2.createdAt,
-  'createdBy'   : testGrp2.createdBy
+  'uBy'   : updateTestPayload.userName,
+  'uAt'   : updateTestPayload.uAt,
+  'cAt'   : testGrp2.cAt,
+  'cBy'   : testGrp2.cBy
 };
 
 const grpList: GroupItem[] = [testGrp, testGrp2] ;
@@ -79,14 +79,13 @@ class MockRepo implements GroupsRepositoryInterface {
     return this.mockResultList!;
   }
 
-  async update (grpKey: GroupItemKey, payload: any)
+  async update (grpItem: GroupItem)
   {
     assert.ok(this.mockResult);
-    expect(grpKey).to.deep.equal(testGrpKey2);
-    const updatedItem: GroupItem = testGrp2;
-    updatedItem.description = payload.description;
-    updatedItem.updatedAt = payload.updatedAt;
-    updatedItem.updatedBy = payload.updatedBy;
+    //expect(grpItem).to.deep.equal(testGrpKey2);
+    const updatedItem: GroupItem = grpItem;
+    updatedItem.cAt = testGrp2.cAt;
+    updatedItem.cBy = testGrp2.cBy;
 
     return updatedItem;
   }
@@ -101,7 +100,7 @@ describe('GroupsService', () => {
 
     const request = {
       groupName: 'Closing',
-      desc: 'Closing process related documents',
+      description: 'Closing process related documents',
       userName: 'brahmeswara@yahoo.com'
     }
     const result = await grpService.create(request);
@@ -114,7 +113,7 @@ describe('GroupsService', () => {
 
     const request = {
       groupName: 'Mortgage',
-      desc: 'Mortgage process related documents',
+      description: 'Mortgage process related documents',
       userName: 'brahmeswara@yahoo.com'
     }
     const result = await grpService.create(request);

@@ -21,7 +21,7 @@
         "create-wait": "aws dynamodb wait table-exists --table-name testtable",
         "delete-wait": "aws dynamodb wait table-not-exists --table-name testtable",
         "cleanup-db": "npm run deleteTable && npm run delete-wait && npm run createTable > test/db.out && npm run create-wait",
-        "integration-test": "mocha -r ts-node/register -r source-map-support/register test/*integration*.ts -timeout 10000"
+        "integration-test": "npm run cleanup-db && mocha -r ts-node/register -r source-map-support/register test/*integration*.ts -timeout 10000"
     },
     "devDependencies": {
         "@types/aws-lambda": "^8.10.75",
