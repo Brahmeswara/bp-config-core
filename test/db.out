@@ -1,5 +1,5 @@
 
-> @docudata/bp-config-core@1.2.0 createTable
+> @docudata/bp-config-core@1.2.1 createTable
 > aws dynamodb create-table --cli-input-json file://test/db-table.json --no-paginate
 
 {
@@ -30,7 +30,7 @@
             }
         ],
         "TableStatus": "CREATING",
-        "CreationDateTime": "2021-05-07T04:32:54.804000-07:00",
+        "CreationDateTime": "2021-05-07T05:01:12.422000-07:00",
         "ProvisionedThroughput": {
             "NumberOfDecreasesToday": 0,
             "ReadCapacityUnits": 5,
@@ -39,7 +39,7 @@
         "TableSizeBytes": 0,
         "ItemCount": 0,
         "TableArn": "arn:aws:dynamodb:us-east-1:356531459747:table/testtable",
-        "TableId": "13ea230b-5213-4c61-8bb8-a4a0697a39ca",
+        "TableId": "20c0086f-a59e-4681-8ef2-78aedfae9129",
         "GlobalSecondaryIndexes": [
             {
                 "IndexName": "bpGS1",
